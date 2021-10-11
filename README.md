@@ -1,8 +1,32 @@
-# flask-template
-Repository creates for fast running development process with configuration for Flask framework, which are the same from project to project.
+# moscow-books-recomendation-system
+
+### Table of contents
+- [Overview](#Overview)
+- [Documentation](#Documentation)
+- [Git info](#Git-info)
+- [Development](#Development)
+	- [Local Development](#Local-development)
+	- [Docker](#Docker)
+- [Testing](#Testing)
+	- [Code style](#Code-style)
+	- [Unit tests](#Unit-tests)
+- [Other useful info](#Other-useful-info)
+	- [Authors](#Authors)
+	- [Contributing](#Contributing)
+	- [Code of Conduct](#Code-of-Conduct)
+	- [License](#License)
+	- [DI container](#DI-container)
+
+## Overview
+Recommendation system for users of Moscow libraries via Flask framework.
 
 ## Documentation
 ...
+
+## Git info
+* For each issue, a separate branch is created with the name "feature/[name_of_feature]" (without []);
+* After the work is completed, a pull request is created to the master branch;
+* Make sure that all CI & CD validations are passed successful.
 
 ## Development
 ### Local development
@@ -11,7 +35,7 @@ Repository creates for fast running development process with configuration for F
 ```
 pip install virtualenv
 virtualenv venv
-CALL venv/Scripts/activate (on Windows)
+CALL venv/Scripts/activate.bat (on Windows)
 source venv/bin/activate (on Linux)
 pip install -r requirements.txt
 ```
@@ -21,8 +45,8 @@ pip install -r requirements.txt
 
 ### Docker
 ```
-docker build -t flask-template:latest .
-docker run -d -p 5000:5000 flask-template:latest
+docker build -t moscow-books-recomendation-system:latest .
+docker run -d -p 5000:5000 moscow-books-recomendation-system:latest
 ```
 
 ## Testing
@@ -34,21 +58,23 @@ docker run -d -p 5000:5000 flask-template:latest
 
 * Run `pytest`
 
-## Authors
+## Other useful info
+### Authors
 * Aleksandr Seliutin - [selutin99](https://github.com/selutin99)
+* Mayya Kotyga - [Kotyga](https://github.com/Kotyga)
+* Michael Bolshepopov - [Michael](https://vk.com/big____foot)
+* Valeria Beria - [Beria](https://vk.com/hackergod707)
 
-## Contributing
+### Contributing
 Please, follow [Contributing](CONTRIBUTING.md) page.
 
-## Code of Conduct
+### Code of Conduct
 Please, follow [Code of Conduct](CODE_OF_CONDUCT.md) page.
 
-## License
+### License
 This project is Apache License 2.0 - see the [LICENSE](LICENSE) file for details
 
-## Other useful info
-
-#### Template stack
+### DI container
 This template uses the `flask_inject` module to implement a dependency injection container. 
 It is assumed that the services you create will be added to the container manually, 
 and your routes will inject services from the context.
