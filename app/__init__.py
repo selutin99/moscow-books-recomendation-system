@@ -1,13 +1,19 @@
 from flask import Flask
 
+from config.profiles import DevConfig
+from utils.db_utils.pymysql_db_provider import PyMySQLProvider
 from .initial_settings import InitialSettings
 from .utils.flask_inject import Inject
 
 # Create Flask application object and
 app = Flask(__name__)
+active_profile = DevConfig()
 
 # Dependency injection container
 injector = Inject(app)
+
+# Database connect providers
+pymysql_db = PyMySQLProvider(active_profile=active_profile)
 
 
 def create_app() -> Flask:
