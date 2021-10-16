@@ -8,11 +8,10 @@ from config.queries import Queries
 class DataPreparationService:
     def __init__(self):
         self.__offset_data = 10_000
-        self.__engine = create_engine('mysql+pymysql://root:75297529S@localhost/moscow_books')
+        self.__engine = create_engine('mysql+pymysql://root:password@localhost/moscow_books')
 
-    def get_unique_attributes(self):
-        current_offset = 0
-        global_data_frame: pd.DataFrame = pd.DataFrame()
+    def get_unique_attributes(self, is_parallel: bool = False, offset: int = 0):
+        current_offset: int = offset if offset else 0
         books_total_count, = pymysql_db.get_query(query=Queries.GET_BOOKS_COUNT)[0].values()
         total_offset_size: int = books_total_count // self.__offset_data
 
@@ -30,8 +29,10 @@ class DataPreparationService:
                 )
                 writed_dataframe: pd.DataFrame = pd.DataFrame(offset_dataframe_value).T
                 writed_dataframe.to_sql(con=self.__engine, name='books_converted', if_exists='append', index=False)
-                print('Convert row #', index)
+                print('Convert row #', index + current_offset)
 
+            if is_parallel:
+                break
             current_offset += self.__offset_data
 
     def __calculate_normalized_values(self, dataframe: pd.DataFrame) -> list:
@@ -67,3 +68,8 @@ class DataPreparationService:
         changed_dataframe['ager'] = normalized_attributes[9][changed_dataframe['ager']]
 
         return changed_dataframe
+
+
+if __name__ == '__main__':
+    service = DataPreparationService()
+    service.get_unique_attributes(is_parallel=True, offset=int(input('Type offset: ')))
