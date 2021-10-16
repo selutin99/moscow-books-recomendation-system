@@ -1,4 +1,6 @@
+from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
+from flask_sessionstore import Session
 
 from config.profiles import DevConfig
 from utils.db_utils.pymysql_db_provider import PyMySQLProvider
@@ -13,6 +15,7 @@ active_profile = DevConfig()
 injector = Inject(app)
 
 # Database connect providers
+db = SQLAlchemy()
 pymysql_db = PyMySQLProvider(active_profile=active_profile)
 
 
@@ -22,6 +25,10 @@ def create_app() -> Flask:
     init_settings.blueprint_registration()
     # Import error handlers
     init_settings.error_handlers()
+
+    Session(app)
+
+    db.init_app(app)
 
     return app
 

@@ -21,3 +21,4 @@ def json():
 @inject('data_preparation_service')
 def data_preparation(data_preparation_service: DataPreparationService):
     data_preparation_service.get_unique_attributes()
+    return make_response(jsonify(response='Data processed successfully'), 200)

@@ -5,6 +5,11 @@ class Config:
     # Application settings
     DEBUG = True
 
+    # ORM
+    SECRET_KEY = os.urandom(32)
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SESSION_TYPE = 'sqlalchemy'
+
 
 class ProdConfig(Config):
     def __str__(self):
@@ -31,6 +36,6 @@ class DevConfig(Config):
 
     # Database
     MYSQL_USER = 'root'
-    MYSQL_PASSWORD = 'password'
+    MYSQL_PASSWORD = '75297529S'
     MYSQL_URL = 'localhost'
     MYSQL_DB = 'moscow_books'

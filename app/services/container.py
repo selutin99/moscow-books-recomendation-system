@@ -1,7 +1,7 @@
 from typing import NoReturn
 
 from app import injector, InitialSettings, app
-from services.data_preparation_service import DataPreparationService
+from app.services.data_preparation_service import DataPreparationService
 
 
 def container() -> NoReturn:
