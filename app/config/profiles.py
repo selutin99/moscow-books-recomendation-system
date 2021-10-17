@@ -36,6 +36,6 @@ class DevConfig(Config):
 
     # Database
     MYSQL_USER = 'root'
-    MYSQL_PASSWORD = 'password'
+    MYSQL_PASSWORD = '75297529S'
     MYSQL_URL = 'localhost'
     MYSQL_DB = 'moscow_books'

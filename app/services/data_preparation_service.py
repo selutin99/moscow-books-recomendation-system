@@ -1,18 +1,24 @@
 import pandas as pd
 from sqlalchemy import create_engine
 
-from app import pymysql_db
+from app import active_profile, pymysql_db
 from config.queries import Queries
 
 
 class DataPreparationService:
     def __init__(self):
-        self.__offset_data = 10_000
-        self.__engine = create_engine('mysql+pymysql://root:password@localhost/moscow_books')
+        self.__offset_data = 137_946
+        self.__table = 'books_converted'
+        self.__engine = create_engine('mysql+pymysql://{user}:{password}@{host}/{database}'.format(
+            user=active_profile.MYSQL_USER,
+            password=active_profile.MYSQL_PASSWORD,
+            host=active_profile.MYSQL_URL,
+            database=active_profile.MYSQL_DB
+        ))
 
     def get_unique_attributes(self, is_parallel: bool = False, offset: int = 0):
         current_offset: int = offset if offset else 0
-        books_total_count, = pymysql_db.get_query(query=Queries.GET_BOOKS_COUNT)[0].values()
+        books_total_count, = pymysql_db.get_query(Queries.GET_BOOKS_COUNT, tuple())[0].values()
         total_offset_size: int = books_total_count // self.__offset_data
 
         for batch in range(total_offset_size):
@@ -28,7 +34,7 @@ class DataPreparationService:
                     changed_dataframe=offset_dataframe_value
                 )
                 writed_dataframe: pd.DataFrame = pd.DataFrame(offset_dataframe_value).T
-                writed_dataframe.to_sql(con=self.__engine, name='books_converted', if_exists='append', index=False)
+                writed_dataframe.to_sql(con=self.__engine, name=self.__table, if_exists='append', index=False)
                 print('Convert row #', index + current_offset)
 
             if is_parallel:
