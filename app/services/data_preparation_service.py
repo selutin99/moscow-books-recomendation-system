@@ -7,7 +7,7 @@ from config.queries import Queries
 
 class DataPreparationService:
     def __init__(self):
-        self.__offset_data = 137_946
+        self.__offset_data = 200_000
         self.__table = 'books_converted'
         self.__engine = create_engine('mysql+pymysql://{user}:{password}@{host}/{database}'.format(
             user=active_profile.MYSQL_USER,
