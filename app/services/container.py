@@ -2,6 +2,7 @@ from typing import NoReturn
 
 from app import injector, InitialSettings, app
 from app.services.data_preparation_service import DataPreparationService
+from app.services.history_service import HistoryService
 
 
 def container() -> NoReturn:
@@ -14,3 +15,4 @@ def container() -> NoReturn:
 
     # Services classes
     injector.map(data_preparation_service=DataPreparationService())
+    injector.map(history_service=HistoryService())

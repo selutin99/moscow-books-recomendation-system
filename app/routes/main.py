@@ -11,11 +11,6 @@ def index():
     return render_template('main/index.html')
 
 
-@main.route('/json')
-def json():
-    return make_response(jsonify(response='Hello world'), 200)
-
-
 @main.route('/data/prepare')
 @inject('data_preparation_service')
 def data_preparation(data_preparation_service: DataPreparationService):

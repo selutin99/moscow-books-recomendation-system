@@ -11,6 +11,8 @@ class InitialSettings:
         # blueprint for auth routes
         from app.routes.main import main as main_blueprint
         self.app.register_blueprint(main_blueprint)
+        from app.routes.api import api as api_blueprint
+        self.app.register_blueprint(api_blueprint)
 
     def error_handlers(self):
         # Import HTTP base error handlers
