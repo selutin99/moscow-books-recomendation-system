@@ -2,7 +2,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 
 from app import active_profile, pymysql_db
-from config.queries import Queries
+from app.config.queries import Queries
 
 
 class DataPreparationService:

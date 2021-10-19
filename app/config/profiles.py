@@ -10,6 +10,8 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SESSION_TYPE = 'sqlalchemy'
 
+    JSON_AS_ASCII = False
+    JSONIFY_PRETTYPRINT_REGULAR = True
 
 class ProdConfig(Config):
     def __str__(self):
