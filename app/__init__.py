@@ -2,14 +2,14 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 from flask_sessionstore import Session
 
-from config.profiles import DevConfig
-from utils.db_utils.pymysql_db_provider import PyMySQLProvider
-from .initial_settings import InitialSettings
-from .utils.flask_inject import Inject
+from app.config.profiles import DevConfig, ProdConfig
+from app.utils.db_utils.pymysql_db_provider import PyMySQLProvider
+from app.initial_settings import InitialSettings
+from app.utils.flask_inject import Inject
 
 # Create Flask application object and
 app = Flask(__name__)
-active_profile = DevConfig()
+active_profile = ProdConfig()
 
 # Dependency injection container
 injector = Inject(app)
