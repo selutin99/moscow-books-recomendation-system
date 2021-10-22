@@ -10,7 +10,7 @@ class HistoryService:
         for book_id in book_ids_list:
             book_id_value = book_id.get('catalogueRecordID')
             if book_id_value:
-                history: list = pymysql_db.get_query(Queries.GET_BOOKS_HISTORY, tuple([book_id_value]))
+                history: list = pymysql_db.get_query(Queries.GET_BOOK, tuple([book_id_value]))
                 for current_book in history:
                     if current_book not in history_list:
                         history_list.append(current_book)

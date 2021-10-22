@@ -6,7 +6,6 @@ from app.config.profiles import Config
 
 
 class PyMySQLProvider:
-
     def __init__(self, active_profile: Type[Config]):
         self.connection = pymysql.connect(
             host=active_profile.MYSQL_URL,
